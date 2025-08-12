@@ -1,0 +1,15 @@
+### Vue ###
+node_modules/
+dist/
+
+### Spring Boot ###
+target/
+*.log
+
+### IDEs ###
+.idea/
+*.iml
+
+### System ###
+.DS_Store
+Thumbs.db
