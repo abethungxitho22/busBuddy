@@ -1,7 +1,6 @@
 package za.ca.cput.controller;
 
 import org.springframework.web.bind.annotation.*;
-import za.ca.cput.domain.Route;
 import za.ca.cput.factory.RouteFactory;
 
 import java.util.ArrayList;
