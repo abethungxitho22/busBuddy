@@ -1,10 +1,16 @@
 package za.ca.cput.domain;
 
+import jakarta.persistence.*;
 import za.ca.cput.domain.enums.ShuttleOperatorStatus;
 
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "shuttle_operator")
 public class ShuttleOperator extends User{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long operatorId;
     private LocalDateTime hireDate;
     private Shuttle assignedShuttle;
@@ -157,4 +163,3 @@ public class ShuttleOperator extends User{
         }
     }
 }
-
