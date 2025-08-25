@@ -3,6 +3,7 @@ package za.ca.cput.domain;
 import java.time.LocalDateTime;
 
 public class Notifications {
+
     private Long notificationId;
     private String title;
     private String message;

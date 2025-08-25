@@ -12,7 +12,14 @@ public class Shuttle {
     private Long shuttleId;
     private int capacity;
     private String licensePlate;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn( name = "operator_id", nullable = false)
+    private ShuttleOperator operator;
+
     //private ShuttleOperator shuttleOperator;
+
 
     public Shuttle(){
 
@@ -22,6 +29,9 @@ public class Shuttle {
         this.shuttleId = builder.shuttleId;
         this.capacity = builder.capacity;
         this.licensePlate = builder.licensePlate;
+
+        this.operator = builder.operator;
+
     }
 
     public Long getShuttleId() {
@@ -36,12 +46,21 @@ public class Shuttle {
         return licensePlate;
     }
 
+
+    public ShuttleOperator getOperator() {
+        return operator;
+    }
+
+
     @Override
     public String toString() {
         return "Shuttle{" +
                 "shuttleId=" + shuttleId +
                 ", capacity=" + capacity +
                 ", licensePlate='" + licensePlate + '\'' +
+
+                ", operator=" + (operator != null ? operator.getOperatorId() : "null") +
+
                 '}';
     }
 
@@ -50,6 +69,9 @@ public class Shuttle {
         private Long shuttleId;
         private int capacity;
         private String licensePlate;
+
+        private ShuttleOperator operator;
+
 
         public Builder setShuttleId(Long shuttleId) {
             this.shuttleId = shuttleId;
@@ -66,10 +88,22 @@ public class Shuttle {
             return this;
         }
 
+
+
+        public Builder setOperator(ShuttleOperator operator) {
+            this.operator = operator;
+            return this;
+        }
+
+
         public Builder copy(Shuttle shuttle) {
             this.shuttleId = shuttle.shuttleId;
             this.capacity = shuttle.capacity;
             this.licensePlate = shuttle.licensePlate;
+
+            this.operator = shuttle.operator;
+
+          
             return this;
         }
 
