@@ -45,7 +45,7 @@ export default {
         return;
       }
       alert(
-          `✅ Booking successful!\nRoute: ${this.form.route}\nDate: ${this.form.date}\nPassengers: ${this.form.passengers}`
+        `✅ Booking successful!\nRoute: ${this.form.route}\nDate: ${this.form.date}\nPassengers: ${this.form.passengers}`
       );
     },
   },
