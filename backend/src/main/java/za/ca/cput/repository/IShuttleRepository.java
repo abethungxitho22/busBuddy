@@ -5,7 +5,7 @@ import za.ca.cput.domain.Shuttle;
 
 import java.util.List;
 
-public interface ShuttleRepository extends JpaRepository<Shuttle, Long> {
+public interface IShuttleRepository extends JpaRepository<Shuttle, Long> {
     List<Shuttle> findByCapacity(int capacity);
     List<Shuttle> findByLicensePlate(String licensePlate);
 }

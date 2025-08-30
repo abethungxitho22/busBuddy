@@ -1,21 +1,33 @@
 package za.ca.cput.domain;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
+
+@Entity
 public class Schedule {
-    private Long scheduleId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long scheduleId; // Fixed spelling: shechduleId → scheduleId
+
+    @ManyToOne
+    @JoinColumn(name = "shuttle_id")
     private Shuttle shuttle;
+
+    @ManyToOne
+    @JoinColumn(name = "operator_id")
     private ShuttleOperator operator;
+
     private String origin;
     private String destination;
     private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;
     private int availableSeats;
 
-
     protected Schedule() {}
 
-    public Schedule(Builder builder) {
+    private Schedule(Builder builder) {
         this.scheduleId = builder.scheduleId;
         this.shuttle = builder.shuttle;
         this.operator = builder.operator;
@@ -26,42 +38,23 @@ public class Schedule {
         this.availableSeats = builder.availableSeats;
     }
 
-
-    public Long getScheduleId() {
-        return scheduleId;
-    }
-
-    public Shuttle getShuttle() {
-        return shuttle;
-    }
-
-    public ShuttleOperator getOperator() {
-        return operator;
-    }
-
-    public String getOrigin() {
-        return origin;
-    }
-
-    public String getDestination() {
-        return destination;
-    }
-
-    public LocalDateTime getArrivalTime() {
-        return arrivalTime;
-    }
-
-    public int getAvailableSeats() {
-        return availableSeats;
-    }
+    // Getters
+    public Long getScheduleId() { return scheduleId; }
+    public Shuttle getShuttle() { return shuttle; }
+    public ShuttleOperator getOperator() { return operator; }
+    public String getOrigin() { return origin; }
+    public String getDestination() { return destination; }
+    public LocalDateTime getDepartureTime() { return departureTime; }
+    public LocalDateTime getArrivalTime() { return arrivalTime; }
+    public int getAvailableSeats() { return availableSeats; }
 
 
     @Override
     public String toString() {
         return "Schedule{" +
                 "scheduleId=" + scheduleId +
-                ", shuttle=" + shuttle +
-                ", operator=" + operator +
+                ", shuttle=" + (shuttle != null ? "Shuttle ID:" + shuttle.getShuttleId() + ", Capacity:" + shuttle.getCapacity() : "null") +
+                ", operator=" + (operator != null ? operator.getFirstName() + " " + operator.getLastName() + " (ID:" + operator.getOperatorId() + ")" : "null") + // FIXED: operator.getFirstName() instead of operator.getUser().getFirstName()
                 ", origin='" + origin + '\'' +
                 ", destination='" + destination + '\'' +
                 ", departureTime=" + departureTime +
@@ -71,7 +64,7 @@ public class Schedule {
     }
 
     public static class Builder {
-        private Long scheduleId;
+        private Long scheduleId; // Fixed spelling: shechduleId → scheduleId
         private Shuttle shuttle;
         private ShuttleOperator operator;
         private String origin;
@@ -80,7 +73,7 @@ public class Schedule {
         private LocalDateTime arrivalTime;
         private int availableSeats;
 
-        public Builder setScheduleId(Long scheduleId) {
+        public Builder setScheduleId(Long scheduleId) { // Fixed spelling: setShechduleId → setScheduleId
             this.scheduleId = scheduleId;
             return this;
         }
@@ -121,7 +114,7 @@ public class Schedule {
         }
 
         public Builder copy(Schedule schedule) {
-            this.scheduleId = schedule.scheduleId;
+            this.scheduleId = schedule.scheduleId; // Fixed spelling: shechduleId → scheduleId
             this.shuttle = schedule.shuttle;
             this.operator = schedule.operator;
             this.origin = schedule.origin;
@@ -132,6 +125,8 @@ public class Schedule {
             return this;
         }
 
-
+        public Schedule build() {
+            return new Schedule(this);
+        }
     }
 }
