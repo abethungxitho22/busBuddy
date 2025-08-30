@@ -1,117 +1,101 @@
 package za.ca.cput.domain;
 
-public class Student extends User{
-    private String studentNumber;
-    private Booking bookings;
-    private Feedback feedback;
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "student")
+public class Student {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long studentNumber;
+
+    private String firstName;
+    private String lastName;
+    @Column(unique = true, nullable = false)
+    private String email;
+    private String password;
+
+    public String getRole() {
+        return "STUDENT";
+    }
 
     protected Student() {
     }
 
     private Student(Builder builder) {
         this.studentNumber = builder.studentNumber;
-        this.bookings = builder.bookings;
-        this.feedback = builder.feedback;
-        this.userId = builder.userId;
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
         this.email = builder.email;
         this.password = builder.password;
-        this.notifications = builder.notifications;
     }
 
-    public String getStudentNumber() {
+    public Long getStudentId() {
         return studentNumber;
     }
-
-    public Booking getBookings() {
-        return bookings;
-    }
-    public Feedback getFeedback() {
-        return feedback;
+    public String getFirstName() {
+        return firstName;
     }
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "studentNumber='" + studentNumber + '\'' +
-                ", bookings=" + bookings +
-                ", feedback=" + feedback +
-                ", userId=" + userId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", notifications=" + notifications +
-                '}';
+    public String getLastName() {
+        return lastName;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+
 
     public static class Builder {
-        private String studentNumber;
-        private Booking booking;
-        private Feedback feedback;
-        private Long userId;
+        private Long studentNumber;
         private String firstName;
         private String lastName;
         private String email;
         private String password;
         private Notifications notifications;
 
-        public Builder studentNumber(String studentNumber) {
+        public Builder setStudentId(Long studentNumber) {
             this.studentNumber = studentNumber;
             return this;
         }
 
-        public Builder bookings(Booking bookings) {
-            this.bookings = bookings;
-            return this;
-        }
-
-        public Builder feedback(Feedback feedback) {
-            this.feedback = feedback;
-            return this;
-        }
-
-        public Builder userId(Long userId) {
-            this.userId = userId;
-            return this;
-        }
-
-        public Builder firstName(String firstName) {
+        public Builder setFirstName(String firstName) {
             this.firstName = firstName;
             return this;
         }
 
-        public Builder lastName(String lastName) {
+        public Builder setLastName(String lastName) {
             this.lastName = lastName;
             return this;
         }
 
-        public Builder email(String email) {
+        public Builder setEmail(String email) {
             this.email = email;
             return this;
         }
 
-        public Builder password(String password) {
+        public Builder setPassword(String password) {
             this.password = password;
             return this;
         }
 
-        public Builder notifications(Notifications notifications) {
+        public Builder setNotifications(Notifications notifications) {
             this.notifications = notifications;
             return this;
         }
 
-        public Builder copy(Builder builder){
-            this.studentNumber = builder.studentNumber;
-            this.bookings = builder.bookings;
-            this.feedback = builder.feedback;
-            this.userId = builder.userId;
-            this.firstName = builder.firstName;
-            this.lastName = builder.lastName;
-            this.email = builder.email;
-            this.password = builder.password;
-            this.notifications = builder.notifications;
+        public Builder copy(Student student) {
+            this.firstName = student.firstName;
+            this.lastName = student.lastName;
+            this.email = student.email;
+            this.password = student.password;
+            this.studentNumber = student.studentNumber;// Consider defensive copy if Notifications can change
             return this;
         }
 

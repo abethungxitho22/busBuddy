@@ -1,11 +1,13 @@
 package za.ca.cput.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import za.ca.cput.domain.Schedule;
 import za.ca.cput.repository.ScheduleRepository;
 
 import java.util.List;
 
+@Service
 public class ScheduleService implements IScheduleService{
 
     private final ScheduleRepository repository;

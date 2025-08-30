@@ -3,17 +3,19 @@ package za.ca.cput.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.ca.cput.domain.Shuttle;
-import za.ca.cput.repository.ShuttleRepository;
+import za.ca.cput.domain.ShuttleOperator;
+import za.ca.cput.repository.IShuttleRepository;
+import za.ca.cput.repository.IShuttleRepository;
 
 import java.util.List;
 
 @Service
 public class ShuttleService implements IShuttleService{
 
-    private final ShuttleRepository shuttleRepository;
+    private final IShuttleRepository shuttleRepository;
 
     @Autowired
-    public ShuttleService(ShuttleRepository repository) {
+    public ShuttleService(IShuttleRepository repository) {
         this.shuttleRepository = repository;
     }
 
@@ -42,5 +44,20 @@ public class ShuttleService implements IShuttleService{
     @Override
     public List<Shuttle> getAll() {
         return this.shuttleRepository.findAll();
+    }
+
+    @Override
+    public List<Shuttle> getByShuttleOperator(ShuttleOperator operator) {
+        return List.of();
+    }
+
+    @Override
+    public List<Shuttle> searchBylicensePlate(String keyword) {
+        return List.of();
+    }
+
+    @Override
+    public List<Shuttle> filterByCapacity(int minCapacity, int maxCapacity) {
+        return List.of();
     }
 }

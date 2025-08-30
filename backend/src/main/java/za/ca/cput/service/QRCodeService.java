@@ -7,7 +7,7 @@ import za.ca.cput.repository.QRCodeRepository;
 import java.util.Optional;
 
 @Service
-public class QRCodeService implements IQRCodeService {
+public class QRCodeService implements IService<QRCode, Long> {
 
     private final QRCodeRepository repository;
 
