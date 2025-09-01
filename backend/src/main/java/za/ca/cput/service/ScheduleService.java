@@ -35,8 +35,9 @@ public class ScheduleService implements IScheduleService{
 
     }
    @Override
-   public void delete(Long scheduleId) {
+   public boolean delete(Long scheduleId) {
        this.repository.deleteById(scheduleId);
+       return !this.repository.existsById(scheduleId);
 
 }
 

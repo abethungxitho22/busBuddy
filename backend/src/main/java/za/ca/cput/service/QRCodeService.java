@@ -35,7 +35,12 @@ public class QRCodeService implements IService<QRCode, Long> {
     }
 
     @Override
-    public void delete(Long id) {
-        repository.deleteById(id);
+    public boolean delete(Long id) {
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+            return true;
+        }
+        return false;
+
     }
 }

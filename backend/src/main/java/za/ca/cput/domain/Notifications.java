@@ -1,14 +1,26 @@
 package za.ca.cput.domain;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "notifications")
 public class Notifications {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long notificationId;
+
     private String title;
     private String message;
     private LocalDateTime sentTime;
     private boolean isRead;
+
+    @Column(name = "recipient_id")
+    private Long recipientId;
+
+    @Column(name = "recipient_role")
+    private String recipientRole;
 
     protected Notifications() {
 
@@ -42,6 +54,7 @@ public class Notifications {
         return isRead;
     }
 
+
     @Override
     public String toString() {
         return "Notifications{" +
@@ -50,6 +63,8 @@ public class Notifications {
                 ", message='" + message + '\'' +
                 ", sentTime=" + sentTime +
                 ", isRead=" + isRead +
+                ", recipientId=" + recipientId +
+                ", recipientRole='" + recipientRole + '\'' +
                 '}';
     }
 
@@ -59,6 +74,9 @@ public class Notifications {
         private String message;
         private LocalDateTime sentTime;
         private boolean isRead;
+        private Long recipientId;
+        private String recipientRole;
+
 
         public Builder setNotificationId(Long notificationId) {
             this.notificationId = notificationId;
@@ -80,8 +98,18 @@ public class Notifications {
             return this;
         }
 
-        public Builder setRead(boolean isRead) {
-            this.isRead = isRead;
+        public Builder setRead(boolean read) {
+            isRead = read;
+            return this;
+        }
+
+        public Builder setRecipientId(Long recipientId) {
+            this.recipientId = recipientId;
+            return this;
+        }
+
+        public Builder setRecipientRole(String recipientRole) {
+            this.recipientRole = recipientRole;
             return this;
         }
 
@@ -91,7 +119,9 @@ public class Notifications {
                     .setTitle(this.title)
                     .setMessage(this.message)
                     .setSentTime(this.sentTime)
-                    .setRead(this.isRead);
+                    .setRead(this.isRead)
+                    .setRecipientId(this.recipientId)
+                    .setRecipientRole(this.recipientRole);
         }
 
         public Notifications build() {

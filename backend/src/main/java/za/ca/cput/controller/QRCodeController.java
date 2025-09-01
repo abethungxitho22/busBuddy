@@ -39,8 +39,5 @@ public class QRCodeController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
-    public List<QRCode> getAll() {
-        return service.getAll();
-    }
+
 }

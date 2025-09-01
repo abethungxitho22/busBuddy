@@ -19,7 +19,7 @@ public class FeedbackController {
 
     @PostMapping("/create")
     public Feedback create(@RequestBody Feedback feedback){
-        return service.create(feedback);
+        return feedbackService.create(feedback);
     }
     @GetMapping("/read/{Id}")
     public Feedback read(@PathVariable Long Id) {

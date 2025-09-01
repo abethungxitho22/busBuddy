@@ -4,6 +4,7 @@ package za.ca.cput.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.ca.cput.domain.Feedback;
+import za.ca.cput.domain.Shuttle;
 import za.ca.cput.repository.FeedbackRepository;
 
 import java.util.List;
@@ -33,8 +34,12 @@ public class FeedbackService implements IFeedbackService {
         return feedbackRepository.save(feedback);
     }
    @Override
-    public void delete(Long Id) {
-        feedbackRepository.deleteById(Id);
+    public boolean delete(Long Id) {
+         if(feedbackRepository.existsById(Id)){
+              feedbackRepository.deleteById(Id);
+              return true;
+         }
+         return false;
 
     }
 
@@ -44,7 +49,12 @@ public class FeedbackService implements IFeedbackService {
         return feedbackRepository.findAll();
     }
 
+    @Override
     public List<Feedback> findByShuttleId(Long shuttleId) {
-        return feedbackRepository.findByShuttleId(shuttleId);
+        return List.of();
+    }
+
+    public List<Feedback> findByShuttleId(Shuttle shuttleId) {
+        return feedbackRepository.findByShuttle(shuttleId);
     }
 }
