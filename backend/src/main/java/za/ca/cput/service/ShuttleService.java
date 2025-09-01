@@ -36,8 +36,12 @@ public class ShuttleService implements IShuttleService{
     }
 
     @Override
-    public void delete(Long shuttleId) {
-        shuttleRepository.deleteById(shuttleId);
+    public boolean delete(Long shuttleId) {
+        if (shuttleRepository.existsById(shuttleId)) {
+            shuttleRepository.deleteById(shuttleId);
+            return true;
+        }
+        return false;
 
     }
 

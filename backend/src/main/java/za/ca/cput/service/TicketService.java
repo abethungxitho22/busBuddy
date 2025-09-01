@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import za.ca.cput.domain.Ticket;
 import za.ca.cput.repository.TicketRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,7 +36,16 @@ public class TicketService implements ITicketService {
     }
 
     @Override
-    public void delete(Long id) {
-        repository.deleteById(id);
+    public boolean delete(Long id) {
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<Ticket> getAll() {
+        return repository.findAll();
     }
 }
